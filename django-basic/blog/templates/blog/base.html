@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>{% block title %}The Tech Blog{% endblock %}</title>
+        <link rel="stylesheet" href="{% static "bootstrap-3.3.5-dist/css/bootstrap.min.css" %}">
+        <link rel="stylesheet" href="{% static "bootstrap-3.3.5-dist/css/bootstrap-theme.min.css" %}">
+        <link rel="stylesheet" href="{% static "font-awesome-4.4.0/css/font-awesome.min.css" %}">
+        <link rel="stylesheet" href="{% static "css/google-fonts.css" %}">
+        <link rel="stylesheet" href="{% static "css/blog.css" %}">
+        <link rel="stylesheet" href="{% static "css/login.css" %}">
+        <link rel="stylesheet" href="{% static "css/menu.css" %}">
+        <link rel="stylesheet" href="{% static "d3/nv.d3.css" %}">
+        <script src="{% static "js/jquery-2.1.4.min.js" %}"></script>
+        <script src="{% static "bootstrap-3.3.5-dist/js/bootstrap.min.js" %}"></script>
+        <script src="{% static "d3/d3.min.js" %}"></script>
+        <script src="{% static "d3/nv.d3.min.js" %}"></script>
+        <script src="{% static "js/common.js" %}"></script> 
+    </head>
+    <body>
+        <!-- Top menu -->
+        <span class='today-date'>
+            {% now "j-M-Y H:i" %} IST
+            {% if user.is_authenticated %}
+                <span class="label label-success">{{ user.username }}</span>
+            {% endif %}
+        </span>
+        {% include "blog/topmenu.html" %}
+
+        <!-- Header image -->
+        <img src="{% static 'images/header.jpg' %}" style="width:100%">
+        <div class="page-header">
+            <h1 class="site-title-header"><a href="/">The<br>Tech<br>Blog</a></h1>
+        </div>
+
+        <!-- Main menu -->
+        {% include "blog/mainmenu.html" %}
+
+        <!-- Breadcrumbs -->
+        {% include "blog/breadcrumbs.html" %}
+                
+        <!-- Main content -->
+        <div class="content maincontent">
+            <div class="row">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            &copy; 2015-2017 The Tech Blog, Bangalore. All Rights Reserved.
+            <div class="up-arrow">
+                <a href="#"><span class="glyphicon glyphicon-menu-up"></span></a>
+            </div>
+        </div>
+    </body>
+</html>
